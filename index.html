@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dibuat khusus buat Bapak Adri 🤍</title>
-
   <style>
     body {
-      margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: linear-gradient(135deg, #fdfbfb, #ebedee);
       min-height: 100vh;
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,24 +17,24 @@
 
     .container {
       background: white;
-      padding: 28px;
-      border-radius: 18px;
+      padding: 24px 28px;
+      border-radius: 16px;
       max-width: 420px;
       width: 90%;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
 
     h1 {
-      text-align: center;
       font-size: 22px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      text-align: center;
     }
 
-    .subtitle {
+    p.subtitle {
       text-align: center;
       font-size: 14px;
-      color: #777;
-      margin-bottom: 22px;
+      color: #666;
+      margin-bottom: 24px;
     }
 
     .question {
@@ -56,126 +55,73 @@
     button {
       width: 100%;
       padding: 12px;
-      border-radius: 14px;
       border: none;
+      border-radius: 12px;
       background: #111;
       color: white;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     button:hover {
       opacity: 0.9;
     }
 
-    .feedback {
-      font-size: 12px;
-      margin-left: 6px;
-    }
-
-    /* RESULT PAGE */
     .result {
       display: none;
-      min-height: 100vh;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #fde2e4, #e2ece9);
       text-align: center;
-      animation: fadeBg 1.5s ease forwards;
-    }
-
-    .result h2,
-    .result p {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeText 1s ease forwards;
+      animation: fadeIn 0.6s ease;
     }
 
     .result h2 {
-      animation-delay: 0.6s;
+      font-size: 20px;
+      margin-bottom: 12px;
     }
 
-    .result p:nth-of-type(1) {
-      animation-delay: 1.8s;
+    .result p {
+      font-size: 15px;
+      line-height: 1.6;
     }
 
-    .result p:nth-of-type(2) {
-      animation-delay: 3.2s;
-    }
-
-    @keyframes fadeBg {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeText {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-
 <body>
-  <div class="container" id="quiz">
-    <h1>Quiz Dadakan!</h1>
-    <p class="subtitle">Selesai tidak selesai, dikumpulkan.</p>
+  <div class="container">
+    <div id="quiz">
+      <h1>Quiz Dadakan! </h1>
+      <p class="subtitle">Selesai tidak selesai, dikumpulkan.</p>
 
-    <div class="question">
-      <p>1. Kata-kata yang sering diucapkan Intan ketika Adri nakal adalah…</p>
-      <label>
-        <input type="radio" name="q1" onclick="checkAnswer(this, 'b')" />
-        Jangan nakal ya (soft spoken banget) <span class="feedback"></span>
-      </label>
-      <label>
-        <input type="radio" name="q1" onclick="checkAnswer(this, 'b')" />
-        Jangan gembelengan <span class="feedback"></span>
-      </label>
+      <div class="question">
+        <p>1. Kata-kata yang sering diucapkan Intan ketika Adri nakal adalah..</p>
+        <label><input type="radio" name="q1" value="a" onclick="checkAnswer(this, 'b')" /> a. Jangan nakal ya (wow very soft spoken!) <span class="feedback"></span></label>
+        <label><input type="radio" name="q1" value="b" onclick="checkAnswer(this, 'b')" /> b. Jangan gembelengan <span class="feedback"></span></label>
+      </div>
+
+      <div class="question">
+        <p>2. Password yang harus diucapkan ketika Intan mengangkat telepon dari Adri adalah..</p>
+        <label><input type="radio" name="q2" value="a" onclick="checkAnswer(this, 'a')" /> a. Hello it's me?! <span class="feedback"></span></label>
+        <label><input type="radio" name="q2" value="b" onclick="checkAnswer(this, 'a')" /> b. Dasa dharma pramuka <span class="feedback"></span></label>
+      </div>
+
+      <div class="question">
+        <p>3. Hewan yang ditakuti Intan tapi disukai Adri adalah..</p>
+        <label><input type="radio" name="q3" value="a" onclick="checkAnswer(this, 'a')" /> a. Bayi kambeng <span class="feedback"></span></label>
+        <label><input type="radio" name="q3" value="b" onclick="checkAnswer(this, 'a')" /> b. Kecoa <span class="feedback"></span></label>
+      </div>
+
+      <button onclick="showResult()">Finish Quiz</button>
+      <p id="hint" style="text-align:center;font-size:12px;color:#888;margin-top:8px;display:none;">Tidak ada jawaban salah. Tapi ada jawaban yang bikin senyum.</p>
     </div>
 
-    <div class="question">
-      <p>2. Password saat Adri nelpon Intan adalah…</p>
-      <label>
-        <input type="radio" name="q2" onclick="checkAnswer(this, 'a')" />
-        Hello it’s me?! <span class="feedback"></span>
-      </label>
-      <label>
-        <input type="radio" name="q2" onclick="checkAnswer(this, 'a')" />
-        Dasa Dharma Pramuka <span class="feedback"></span>
-      </label>
+    <div class="result" id="result">
+      <h2 id="resultTitle">Hey Adri🤍</h2>
+      <p id="resultText"></p>
     </div>
-
-    <div class="question">
-      <p>3. Hewan yang ditakuti Intan tapi disukai Adri adalah…</p>
-      <label>
-        <input type="radio" name="q3" onclick="checkAnswer(this, 'a')" />
-        Bayi kambing <span class="feedback"></span>
-      </label>
-      <label>
-        <input type="radio" name="q3" onclick="checkAnswer(this, 'a')" />
-        Kecoa <span class="feedback"></span>
-      </label>
-    </div>
-
-    <button onclick="showResult()">Finish Quiz</button>
-  </div>
-
-  <div class="result" id="result">
-    <h2>Hai Adri 🤍</h2>
-
-    <p>
-      Walaupun aku nggak bisa main game,<br>
-      tapi aku bisa bikin quiz dan bisa genit HEHE 😌
-    </p>
-
-    <p>
-      Di dunia ini kamu boleh khawatir tentang banyak hal,<br>
-      tapi jangan pernah khawatir apakah aku akan tetap sama kamu atau nggak.<br><br>
-      Kamu bahkan nggak perlu nanya,<br>
-      karena jawabannya akan selalu <strong>IYA</strong>.<br><br>
-      Have a safe flight, kesayangankuuuu ✈️🤍
-    </p>
   </div>
 
   <script>
@@ -184,20 +130,35 @@
       feedbacks.forEach(f => f.innerText = '');
 
       const feedback = input.parentElement.querySelector('.feedback');
-      if (input.nextSibling.textContent.trim().toLowerCase().includes(correct)) {
-        feedback.innerText = ' — betuuul, pinter nih koko aku 😌';
+      if (input.value === correct) {
+        feedback.innerText = ' — betuuul! pinter juga ya kamu 😌';
         feedback.style.color = '#2e7d32';
       } else {
-        feedback.innerText = ' — ngawur, jawab sing nggenahhh 😭';
+        feedback.innerText = ' — ngawur! ayo jawab sing genah?! 😭';
         feedback.style.color = '#c62828';
       }
     }
 
     function showResult() {
-      document.getElementById('quiz').style.display = 'none';
-      document.getElementById('result').style.display = 'block';
+      const quiz = document.getElementById('quiz');
+      const result = document.getElementById('result');
+      const title = document.getElementById('resultTitle');
+      const text = document.getElementById('resultText');
+
+      quiz.style.display = 'none';
+      result.style.display = 'block';
+
+      title.innerText = 'Hai Adri 🤍';
+      text.innerHTML = `Walaupun aku nggak bisa main game,<br>
+      tapi aku bisa bikin quiz dan bisa genit HEHE 😌<br><br>
+      Quiznya cuma gimmick, ku cuma mau bilang: di dunia ini kamu bisa khawatir about a lot of things,
+      tapi jangan pernah khawatir apakah aku akan tetap sama kamu atau nggak.<br>
+      Bahkan kamu nggak perlu nanya, karena jawabannya akan selalu <strong>IYA</strong> huruf gede semua! Hehe
+      Whatever comes our way, we'll get through it together, ok? <br><br>
+      Have a safe flight kesayangankuuuu ✈️🤍`;
     }
   </script>
 </body>
 </html>
+
 
