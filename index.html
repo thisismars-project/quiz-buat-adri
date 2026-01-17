@@ -3,38 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dibuat khusus buat Bapak Adri 🤍</title>
+  <title>Cerdas Cermat Adri 🤍</title>
+
   <style>
     body {
+      margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: linear-gradient(135deg, #fdfbfb, #ebedee);
       min-height: 100vh;
-      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     .container {
       background: white;
-      padding: 24px 28px;
-      border-radius: 16px;
+      padding: 26px 28px;
+      border-radius: 18px;
       max-width: 420px;
       width: 90%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 8px;
       text-align: center;
+      font-size: 22px;
+      margin-bottom: 6px;
     }
 
-    p.subtitle {
+    .subtitle {
       text-align: center;
       font-size: 14px;
-      color: #666;
-      margin-bottom: 24px;
+      color: #777;
+      margin-bottom: 22px;
     }
 
     .question {
@@ -55,49 +59,29 @@
     button {
       width: 100%;
       padding: 12px;
+      border-radius: 14px;
       border: none;
-      border-radius: 12px;
       background: #111;
       color: white;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
-    button:hover {
-      opacity: 0.9;
+    .feedback {
+      font-size: 13px;
+      margin-left: 6px;
     }
 
-    .result {
-      display: none;
-      text-align: center;
-      animation: fadeIn 0.6s ease;
-    }
-
-    .result h2 {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .result p {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
     /* CONFETTI */
     .confetti {
       position: fixed;
       top: -10px;
-      width: 8px;
-      height: 8px;
-      background: red;
-      opacity: 0.8;
-      animation: fall 1.5s linear forwards;
-      z-index: 9999;
+      width: 10px;
+      height: 10px;
+      z-index: 99999;
+      pointer-events: none;
+      animation: fall 1.4s linear forwards;
     }
 
     @keyframes fall {
@@ -119,95 +103,134 @@
       75% { transform: translateX(-3px); }
       100% { transform: translateX(0); }
     }
+
+    /* RESULT */
+    .result {
+      display: none;
+      min-height: 100vh;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #fde2e4, #e2ece9);
+      text-align: center;
+      animation: fadeBg 1.2s ease forwards;
+    }
+
+    .result h2,
+    .result p {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeText 1s ease forwards;
+    }
+
+    .result h2 { animation-delay: 0.6s; }
+    .result p:nth-of-type(1) { animation-delay: 1.6s; }
+    .result p:nth-of-type(2) { animation-delay: 3s; }
+
+    @keyframes fadeBg {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeText {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <div id="quiz">
-      <h1>Quiz Dadakan! </h1>
-      <p class="subtitle">Selesai tidak selesai, dikumpulkan.</p>
+  <div class="container" id="quiz">
+    <h1>Quiz Dadakan!</h1>
+    <p class="subtitle">Selesai tidak selesai, dikumpulkan.</p>
 
-      <div class="question">
-        <p>1. Kata-kata yang sering diucapkan Intan ketika Adri nakal adalah..</p>
-        <label><input type="radio" name="q1" value="a" onclick="checkAnswer(this, 'b')" /> a. Jangan nakal ya (wow very soft spoken!) <span class="feedback"></span></label>
-        <label><input type="radio" name="q1" value="b" onclick="checkAnswer(this, 'b')" /> b. Jangan gembelengan <span class="feedback"></span></label>
-      </div>
-
-      <div class="question">
-        <p>2. Password yang harus diucapkan ketika Intan mengangkat telepon dari Adri adalah..</p>
-        <label><input type="radio" name="q2" value="a" onclick="checkAnswer(this, 'a')" /> a. Hello it's me?! <span class="feedback"></span></label>
-        <label><input type="radio" name="q2" value="b" onclick="checkAnswer(this, 'a')" /> b. Dasa dharma pramuka <span class="feedback"></span></label>
-      </div>
-
-      <div class="question">
-        <p>3. Hewan yang ditakuti Intan tapi disukai Adri adalah..</p>
-        <label><input type="radio" name="q3" value="a" onclick="checkAnswer(this, 'a')" /> a. Bayi kambeng <span class="feedback"></span></label>
-        <label><input type="radio" name="q3" value="b" onclick="checkAnswer(this, 'a')" /> b. Kecoa <span class="feedback"></span></label>
-      </div>
-
-      <button onclick="showResult()">Finish Quiz</button>
-      <p id="hint" style="text-align:center;font-size:12px;color:#888;margin-top:8px;display:none;">Tidak ada jawaban salah. Tapi ada jawaban yang bikin senyum.</p>
+    <div class="question">
+      <p>1. Kata-kata yang sering diucapkan Intan ketika Adri nakal adalah…</p>
+      <label>
+        <input type="radio" name="q1" value="a" onclick="checkAnswer(this, 'b')" />
+        Jangan nakal ya (wow! sangat soft spoken) <span class="feedback"></span>
+      </label>
+      <label>
+        <input type="radio" name="q1" value="b" onclick="checkAnswer(this, 'b')" />
+        Jangan gembelengan! <span class="feedback"></span>
+      </label>
     </div>
 
-    <div class="result" id="result">
-      <h2 id="resultTitle">Hey Adri🤍</h2>
-      <p id="resultText"></p>
+    <div class="question">
+      <p>2. Password yang harus diucapkan ketika Intan mengangkat telepon dari Adri adalah…</p>
+      <label>
+        <input type="radio" name="q2" value="a" onclick="checkAnswer(this, 'a')" />
+        Hello it’s me?! <span class="feedback"></span>
+      </label>
+      <label>
+        <input type="radio" name="q2" value="b" onclick="checkAnswer(this, 'a')" />
+        Sumpah Pemuda <span class="feedback"></span>
+      </label>
     </div>
+
+    <div class="question">
+      <p>3. Hewan yang ditakuti Intan tapi disukai Adri adalah…</p>
+      <label>
+        <input type="radio" name="q3" value="a" onclick="checkAnswer(this, 'a')" />
+        Bayi kambing hitam 😭 <span class="feedback"></span>
+      </label>
+      <label>
+        <input type="radio" name="q3" value="b" onclick="checkAnswer(this, 'a')" />
+        Kecoa terbang <span class="feedback"></span>
+      </label>
+    </div>
+
+    <button onclick="showResult()">Finish Quiz</button>
+  </div>
+
+  <div class="result" id="result">
+    <h2>Hai Adri 🤍</h2>
+    <p>
+      Walaupun aku nggak bisa main game,<br>
+      tapi aku bisa bikin quiz dan bisa genit HEHE 😌
+    </p>
+    <p>
+     Quiznya gimmick aja sii, aku cuma mau bilang: Di dunia ini kamu boleh khawatir tentang banyak hal,<br>
+      tapi jangan pernah khawatir apakah aku akan tetap sama kamu atau nggak.<br><br>
+      Kamu bahkan nggak perlu nanya, karena jawabannya akan selalu <strong>IYA</strong> huruf gede semua. Hehehe <br><br> Whatever comes our way, we'll get through it together, OK? <br> <br>    
+      Have a safe flight kesayangankuuuu ✈️🤍
+    </p>
   </div>
 
   <script>
     function launchConfetti() {
-      for (let i = 0; i < 25; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
-        confetti.style.animationDuration = 1 + Math.random() + 's';
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1500);
+      for (let i = 0; i < 30; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        c.style.animationDuration = 1 + Math.random() + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1500);
       }
     }
 
     function checkAnswer(input, correct) {
-      const feedbacks = input.parentElement.parentElement.querySelectorAll('.feedback');
+      const question = input.closest('.question');
+      const feedbacks = question.querySelectorAll('.feedback');
       feedbacks.forEach(f => f.innerText = '');
 
       const feedback = input.parentElement.querySelector('.feedback');
+
       if (input.value === correct) {
         feedback.innerText = ' — betuuul! pinter juga ya kamu 😌🎉';
         feedback.style.color = '#2e7d32';
         launchConfetti();
       } else {
-        feedback.innerHTML = ' — salah 😭 <span class="cry">😭</span>';
-        feedback.style.color = '#c62828';
-      }
-    } else {
-        feedback.innerText = ' — ngawur! ayo jawab sing genah?! 😭';
+        feedback.innerHTML = ' — ngawur! ayo jawab sing genah?! <span class="cry">😭</span>';
         feedback.style.color = '#c62828';
       }
     }
 
     function showResult() {
-      const quiz = document.getElementById('quiz');
-      const result = document.getElementById('result');
-      const title = document.getElementById('resultTitle');
-      const text = document.getElementById('resultText');
-
-      quiz.style.display = 'none';
-      result.style.display = 'block';
-
-      title.innerText = 'Hai Adri 🤍';
-      text.innerHTML = `Walaupun aku nggak bisa main game,<br>
-      tapi aku bisa bikin quiz dan bisa genit HEHE 😌<br><br>
-      Quiznya cuma gimmick, ku cuma mau bilang: di dunia ini kamu bisa khawatir about a lot of things,
-      tapi jangan pernah khawatir apakah aku akan tetap sama kamu atau nggak.<br>
-      Bahkan kamu nggak perlu nanya, karena jawabannya akan selalu <strong>IYA</strong> huruf gede semua! Hehe..
-      Whatever comes our way, we'll get through it together, ok? <br><br>
-      Have a safe flight kesayangankuuuu ✈️🤍`;
+      document.getElementById('quiz').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
     }
   </script>
 </body>
 </html>
-
-
-
