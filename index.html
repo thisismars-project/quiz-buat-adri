@@ -4,7 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cerdas Cermat Adri 🤍</title>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surprise Adri</title>
 
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #fff1eb, #ace0f9);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      background-color: #ffcc00;
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+    }
+
+    button:hover {
+      background-color: #ffdb4d;
+    }
+
+    img {
+      width: 200px;
+      margin: 20px 0;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-12px); }
+      60% { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="opening">
+    <h1>🎉 SURPRISEEEEE!!! 🎉</h1>
+
+    <p>
+      Kamu pasti nggak expect kan?<br>
+      Sama! Aku juga bikin ini dadakan haha
+    </p>
+
+    <p><strong>Aku punya quiz! Kamu harus jawab!</strong></p>
+
+    <img src="https://media.tenor.com/6jJ9K9F2vYAAAAAC/spongebob-excited.gif">
+
+    <br>
+
+    <button onclick="startQuiz()">Aku siap! Aku siap!</button>
+  </div>
+
+  <script>
+    function startQuiz() {
+      alert("SIAPPP! lanjut ke quiz 😆");
+      // nanti di sini nyambung ke quiz kamu
+    }
+  </script>
+
+</body>
+</html>
+
+
+  
   <style>
     body {
       margin: 0;
@@ -17,53 +100,15 @@
       overflow: hidden;
     }
 
-    /* OPENING */
-    .opening {
-      text-align: center;
-      padding: 30px;
-      max-width: 420px;
-    }
-
-    .opening h1 {
-      font-size: 36px;
-      margin-bottom: 16px;
-    }
-
-    .opening p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    .opening img {
-      width: 200px;
-      margin: 20px 0;
-    }
-
-    .opening button {
-      font-size: 20px;
-      padding: 14px 30px;
-      border-radius: 30px;
-      border: none;
-      background: #ffcc00;
-      cursor: pointer;
-      animation: bounce 1.5s infinite;
-    }
-
-    @keyframes bounce {
-      0%,20%,50%,80%,100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
-    }
-
-    /* QUIZ */
     .container {
-      display: none;
       background: white;
       padding: 26px 28px;
       border-radius: 18px;
       max-width: 420px;
       width: 90%;
       box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -79,8 +124,14 @@
       margin-bottom: 22px;
     }
 
-    .question { margin-bottom: 20px; }
-    .question p { font-weight: 600; }
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question p {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
 
     label {
       display: block;
@@ -88,7 +139,7 @@
       cursor: pointer;
     }
 
-    button.quiz-btn {
+    button {
       width: 100%;
       padding: 12px;
       border-radius: 14px;
@@ -100,127 +151,169 @@
       margin-top: 10px;
     }
 
-    .feedback { font-size: 13px; margin-left: 6px; }
+    .feedback {
+      font-size: 13px;
+      margin-left: 6px;
+    }
 
+    /* CONFETTI */
     .confetti {
       position: fixed;
       top: -10px;
       width: 10px;
       height: 10px;
       z-index: 99999;
+      pointer-events: none;
       animation: fall 1.4s linear forwards;
     }
 
     @keyframes fall {
-      to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
-    .cry { animation: shake 0.4s; display: inline-block; }
+    .cry {
+      display: inline-block;
+      animation: shake 0.4s ease;
+    }
 
     @keyframes shake {
-      0% {transform:0}
-      25% {transform:translateX(-3px)}
-      50% {transform:translateX(3px)}
-      75% {transform:translateX(-3px)}
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      50% { transform: translateX(3px); }
+      75% { transform: translateX(-3px); }
+      100% { transform: translateX(0); }
     }
 
+    /* RESULT */
     .result {
       display: none;
-      text-align: center;
+      min-height: 100vh;
       padding: 40px 20px;
+      background: linear-gradient(135deg, #fde2e4, #e2ece9);
+      text-align: center;
+      animation: fadeBg 1.2s ease forwards;
+    }
+
+    .result h2,
+    .result p {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeText 1s ease forwards;
+    }
+
+    .result h2 { animation-delay: 0.6s; }
+    .result p:nth-of-type(1) { animation-delay: 1.6s; }
+    .result p:nth-of-type(2) { animation-delay: 3s; }
+
+    @keyframes fadeBg {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeText {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="container" id="quiz">
+    <h1>Quiz Dadakan!</h1>
+    <p class="subtitle">Selesai tidak selesai, dikumpulkan.</p>
 
-<!-- OPENING -->
-<div class="opening" id="opening">
-  <h1>🎉 SURPRISEEEEE!!! 🎉</h1>
-  <p>
-    Kamu pasti nggak expect kan?<br>
-    Sama! Aku juga bikin ini dadakan haha
-  </p>
-  <p><strong>Aku punya quiz! Kamu harus jawab!</strong></p>
+    <div class="question">
+      <p>1. Kata-kata yang sering diucapkan Intan ketika Adri nakal adalah…</p>
+      <label>
+        <input type="radio" name="q1" value="a" onclick="checkAnswer(this, 'b')" />
+        Jangan nakal ya (wow! sangat soft spoken) <span class="feedback"></span>
+      </label>
+      <label>
+        <input type="radio" name="q1" value="b" onclick="checkAnswer(this, 'b')" />
+        Jangan gembelengan! <span class="feedback"></span>
+      </label>
+    </div>
 
-  <img 
-  src="https://media.tenor.com/8rX0GkH7nQIAAAAC/spongebob-im-ready.gif"
-  style="width:220px; margin:20px auto; display:block;"
->
+    <div class="question">
+      <p>2. Password yang harus diucapkan ketika Intan mengangkat telepon dari Adri adalah…</p>
+      <label>
+        <input type="radio" name="q2" value="a" onclick="checkAnswer(this, 'a')" />
+        Hello it’s me?! <span class="feedback"></span>
+      </label>
+      <label>
+        <input type="radio" name="q2" value="b" onclick="checkAnswer(this, 'a')" />
+        Sumpah Pemuda <span class="feedback"></span>
+      </label>
+    </div>
 
-  <br>
-  <button onclick="startQuiz()">Aku siap! Aku siap!</button>
-</div>
+    <div class="question">
+      <p>3. Hewan yang ditakuti Intan tapi disukai Adri adalah…</p>
+      <label>
+        <input type="radio" name="q3" value="a" onclick="checkAnswer(this, 'a')" />
+        Bayi kambing hitam 😭 <span class="feedback"></span>
+      </label>
+      <label>
+        <input type="radio" name="q3" value="b" onclick="checkAnswer(this, 'a')" />
+        Kecoa terbang <span class="feedback"></span>
+      </label>
+    </div>
 
-<!-- QUIZ -->
-<div class="container" id="quiz">
-  <h1>Quiz Dadakan!</h1>
-  <p class="subtitle">Selesai tidak selesai, dikumpulkan.</p>
-
-  <div class="question">
-    <p>1. Kata-kata yang sering diucapkan Intan ketika Adri nakal adalah…</p>
-    <label>
-      <input type="radio" name="q1" value="a" onclick="checkAnswer(this,'b')">
-      Jangan nakal ya <span class="feedback"></span>
-    </label>
-    <label>
-      <input type="radio" name="q1" value="b" onclick="checkAnswer(this,'b')">
-      Jangan gembelengan! <span class="feedback"></span>
-    </label>
+    <button onclick="showResult()">Finish Quiz</button>
   </div>
 
-  <div class="question">
-    <p>2. Password ketika Intan angkat telepon adalah…</p>
-    <label>
-      <input type="radio" name="q2" value="a" onclick="checkAnswer(this,'a')">
-      Hello it’s me?! <span class="feedback"></span>
-    </label>
-    <label>
-      <input type="radio" name="q2" value="b" onclick="checkAnswer(this,'a')">
-      Sumpah Pemuda <span class="feedback"></span>
-    </label>
+  <div class="result" id="result">
+    <h2>Hai Adri 🤍</h2>
+    <p>
+      Walaupun aku nggak bisa main game,<br>
+      tapi aku bisa bikin quiz dan bisa genit HEHE 😌
+    </p>
+    <p>
+     Quiznya gimmick aja sii, aku cuma mau bilang: Di dunia ini kamu boleh khawatir tentang banyak hal,<br>
+      tapi jangan pernah khawatir apakah aku akan tetap sama kamu atau nggak.<br><br>
+      Kamu bahkan nggak perlu nanya, karena jawabannya akan selalu <strong>IYA</strong> huruf gede semua. Hehehe <br><br> Whatever comes our way, we'll get through it together, OK? <br> <br>    
+      Have a safe flight kesayangankuuuu ✈️🤍
+    </p>
   </div>
 
-  <button class="quiz-btn" onclick="showResult()">Finish Quiz</button>
-</div>
-
-<div class="result" id="result">
-  <h2>Hai Adri 🤍</h2>
-  <p>Quiznya cuma alasan. Intinya aku selalu di sini, OK?</p>
-</div>
-
-<script>
-  function startQuiz() {
-    document.getElementById('opening').style.display = 'none';
-    document.getElementById('quiz').style.display = 'block';
-  }
-
-  function launchConfetti() {
-    for (let i=0;i<25;i++){
-      const c=document.createElement('div');
-      c.className='confetti';
-      c.style.left=Math.random()*100+'vw';
-      c.style.backgroundColor=`hsl(${Math.random()*360},70%,60%)`;
-      document.body.appendChild(c);
-      setTimeout(()=>c.remove(),1500);
+  <script>
+    function launchConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        c.style.animationDuration = 1 + Math.random() + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1500);
+      }
     }
-  }
 
-  function checkAnswer(input, correct) {
-    const f = input.parentElement.querySelector('.feedback');
-    if (input.value===correct){
-      f.innerText=' — betuuul 😌🎉';
-      launchConfetti();
-    } else {
-      f.innerHTML=' — ngawur 😭';
+    function checkAnswer(input, correct) {
+      const question = input.closest('.question');
+      const feedbacks = question.querySelectorAll('.feedback');
+      feedbacks.forEach(f => f.innerText = '');
+
+      const feedback = input.parentElement.querySelector('.feedback');
+
+      if (input.value === correct) {
+        feedback.innerText = ' — betuuul! pinter juga ya kamu 😌🎉';
+        feedback.style.color = '#2e7d32';
+        launchConfetti();
+      } else {
+        feedback.innerHTML = ' — ngawur! ayo jawab sing genah?! <span class="cry">😭</span>';
+        feedback.style.color = '#c62828';
+      }
     }
-  }
 
-  function showResult(){
-    document.getElementById('quiz').style.display='none';
-    document.getElementById('result').style.display='block';
-  }
-</script>
-
+    function showResult() {
+      document.getElementById('quiz').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
